@@ -40,6 +40,27 @@
   </script>
 </head>
 <body class="bg-paper min-h-[100dvh]">
-  <!-- Card and hint button added in later tasks -->
+  <main class="min-h-[100dvh] grid place-items-center px-4 py-8">
+    <button
+      id="card"
+      type="button"
+      aria-pressed="false"
+      aria-label="Show back of postcard"
+      class="card group block w-[min(92vw,800px)] aspect-[1400/1055] rounded-lg shadow-[0_10px_30px_-12px_rgba(0,0,0,0.35)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-700"
+    >
+      <div class="card-inner relative w-full h-full">
+        <img
+          class="card-face card-face--front absolute inset-0 w-full h-full object-cover rounded-lg"
+          src="/assets/postcard-front.jpg"
+          alt='Postcard front — collage of Lisbon scenes with the title "A place to stay in Lisbon, this summer."'
+        >
+        <img
+          class="card-face card-face--back absolute inset-0 w-full h-full object-cover rounded-lg"
+          src="/assets/postcard-back.jpg"
+          alt="Postcard back — handwritten note describing a Santos flat available 2 July to 13 August, 2 bedrooms, 700 euros per week."
+        >
+      </div>
+    </button>
+  </main>
 </body>
 </html>
