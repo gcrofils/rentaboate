@@ -20,6 +20,10 @@
   transition: transform 700ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.card-inner picture {
+  display: contents;
+}
+
 .card.is-flipped .card-inner {
   transform: rotateY(180deg);
 }
@@ -27,7 +31,7 @@
 .card-face {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  background: #f5f0e6;
+  background: #f3eee8;
   object-fit: cover;
 }
 
@@ -36,9 +40,8 @@
 }
 
 @media (orientation: portrait) {
-  /* The portrait front has the correct aspect; the landscape backs
-     don't yet, so fit them inside the portrait frame with paper
-     letterbox. Remove these rules once portrait backs ship. */
+  /* Back images don't share the front's 9:16; fit them with paper
+     letterbox so text stays readable. */
   #back-en,
   #back-fr {
     object-fit: contain;
@@ -73,7 +76,7 @@
 
 .lang-btn.is-active {
   background: #1e3a8a;
-  color: #f5f0e6;
+  color: #f3eee8;
 }
 
 .lang-btn:not(.is-active):hover {
