@@ -8,6 +8,7 @@
   <meta name="description" content="Bright, lived-in flat in Santos. Available 2 July to 13 August. Friends and friends of friends.">
 
   <link rel="icon" href="/assets/favicon.jpg">
+  <link rel="stylesheet" href="/style.css">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -62,5 +63,18 @@
       </div>
     </button>
   </main>
+  <script>
+    (() => {
+      const card = document.getElementById('card');
+      card.addEventListener('click', () => {
+        const flipped = card.classList.toggle('is-flipped');
+        card.setAttribute('aria-pressed', flipped ? 'true' : 'false');
+        card.setAttribute(
+          'aria-label',
+          flipped ? 'Show front of postcard' : 'Show back of postcard'
+        );
+      });
+    })();
+  </script>
 </body>
 </html>
