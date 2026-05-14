@@ -7,20 +7,20 @@
   <title>Lisbon, this summer — a place to stay</title>
   <meta name="description" content="Bright, lived-in flat in Santos. Available 2 July to 13 August. Friends and friends of friends.">
 
-  <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
-  <link rel="manifest" href="/site.webmanifest?v=2">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico?v=3">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=3">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=3">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=3">
+  <link rel="manifest" href="/site.webmanifest?v=3">
   <meta name="theme-color" content="#f5f0e6">
-  <link rel="stylesheet" href="/style.css?v=2">
+  <link rel="stylesheet" href="/style.css?v=3">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="A place to stay in Lisbon — this summer">
   <meta property="og:description" content="Bright, lived-in flat in Santos. Available 2 July to 13 August. Friends and friends of friends.">
   <meta property="og:url" content="https://lisbon.milizone.com/">
-  <meta property="og:image" content="https://lisbon.milizone.com/assets/og-image.jpg?v=2">
+  <meta property="og:image" content="https://lisbon.milizone.com/assets/og-image.jpg?v=3">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Lisbon postcard — A place to stay in Lisbon">
@@ -29,7 +29,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="A place to stay in Lisbon — this summer">
   <meta name="twitter:description" content="Bright, lived-in flat in Santos. Available 2 July to 13 August. Friends and friends of friends.">
-  <meta name="twitter:image" content="https://lisbon.milizone.com/assets/og-image.jpg?v=2">
+  <meta name="twitter:image" content="https://lisbon.milizone.com/assets/og-image.jpg?v=3">
   <meta name="twitter:image:alt" content="Lisbon postcard — A place to stay in Lisbon">
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -53,24 +53,27 @@
         type="button"
         aria-pressed="false"
         aria-label="Show back of postcard"
-        class="card group block w-[min(92vw,800px)] aspect-[1400/1055] rounded-lg shadow-[0_10px_30px_-12px_rgba(0,0,0,0.35)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-700"
+        class="card group block rounded-lg shadow-[0_10px_30px_-12px_rgba(0,0,0,0.35)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-700"
       >
         <div class="card-inner relative w-full h-full">
-          <img
-            class="card-face card-face--front absolute inset-0 w-full h-full object-cover rounded-lg"
-            src="/assets/postcard-front.jpg?v=2"
-            alt='Postcard front — collage of Lisbon scenes with the title "A place to stay in Lisbon, this summer."'
-          >
+          <picture>
+            <source media="(orientation: portrait)" srcset="/assets/postcard-front-portrait.jpg?v=3">
+            <img
+              class="card-face card-face--front absolute inset-0 w-full h-full rounded-lg"
+              src="/assets/postcard-front.jpg?v=3"
+              alt='Postcard front — collage of Lisbon scenes with the title "A place to stay in Lisbon, this summer."'
+            >
+          </picture>
           <img
             id="back-en"
-            class="card-face card-face--back absolute inset-0 w-full h-full object-cover rounded-lg"
-            src="/assets/postcard-back.jpg?v=2"
+            class="card-face card-face--back absolute inset-0 w-full h-full rounded-lg"
+            src="/assets/postcard-back.jpg?v=3"
             alt="Postcard back (English) — handwritten note describing a Santos flat available 2 July to 13 August, 2 bedrooms, 700 euros per week."
           >
           <img
             id="back-fr"
-            class="card-face card-face--back absolute inset-0 w-full h-full object-cover rounded-lg"
-            src="/assets/postcard-back-fr.jpg?v=2"
+            class="card-face card-face--back absolute inset-0 w-full h-full rounded-lg"
+            src="/assets/postcard-back-fr.jpg?v=3"
             alt="Verso de la carte postale (français) — note manuscrite décrivant un appartement à Santos disponible du 2 juillet au 13 août, 2 chambres, 700 euros par semaine."
             hidden
           >

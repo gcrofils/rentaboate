@@ -4,6 +4,15 @@
   border: 0;
   padding: 0;
   cursor: pointer;
+  width: min(92vw, 800px);
+  aspect-ratio: 1400 / 1055;
+}
+
+@media (orientation: portrait) {
+  .card {
+    width: min(92vw, 480px);
+    aspect-ratio: 941 / 1672;
+  }
 }
 
 .card-inner {
@@ -18,10 +27,22 @@
 .card-face {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  background: #f5f0e6;
+  object-fit: cover;
 }
 
 .card-face--back {
   transform: rotateY(180deg);
+}
+
+@media (orientation: portrait) {
+  /* The portrait front has the correct aspect; the landscape backs
+     don't yet, so fit them inside the portrait frame with paper
+     letterbox. Remove these rules once portrait backs ship. */
+  #back-en,
+  #back-fr {
+    object-fit: contain;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
