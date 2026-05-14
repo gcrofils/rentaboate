@@ -39,15 +39,6 @@
   transform: rotateY(180deg);
 }
 
-@media (orientation: portrait) {
-  /* FR portrait back is 2:3 vs the 9:16 frame; letterbox so text
-     stays readable. EN portrait back matches the frame and uses the
-     default cover. */
-  #back-fr {
-    object-fit: contain;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .card-inner {
     transition: none;
