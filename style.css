@@ -44,3 +44,17 @@
     transition: none;
   }
 }
+
+.lang-btn {
+  background: transparent;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.lang-btn.is-active {
+  background: #1e3a8a;
+  color: #f5f0e6;
+}
+
+.lang-btn:not(.is-active):hover {
+  background: rgba(30, 58, 138, 0.08);
+}
