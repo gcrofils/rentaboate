@@ -15,3 +15,7 @@ GitHub Pages serves the repo root on push to `main`. The `CNAME` file pins the s
 ## DNS
 
 At the DNS provider for `milizone.com`, point `lisbon` as a `CNAME` to `gcrofils.github.io`. HTTPS is enforced automatically by GitHub once the cert is provisioned.
+
+## Updating assets
+
+When swapping the postcard image or restyling `style.css`, bump the `?v=N` query string on every asset reference in `index.html` (find/replace `?v=1` → `?v=2`). That forces browsers and social-platform scrapers to refetch instead of serving a stale copy.
