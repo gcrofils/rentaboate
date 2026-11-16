@@ -18,7 +18,7 @@ Everything that changes between seasons is in `site/_data/settings.yml`: season,
 - `paused: true` hides a photo without removing it.
 - The link preview image is `site/assets/og.jpg` (1200×630), cropped from the hero photo. Regenerate it when the hero changes.
 
-The rest of the copy is in `site/index.njk`.
+The rest of the copy is in `site/index.njk`. It builds one page per language: `/` (English), `/fr/` and `/ru/`, each with its own title and link preview text.
 
 `src/` (gitignored) is a scratch handoff folder, not the Eleventy input.
 

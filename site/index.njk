@@ -1,33 +1,35 @@
 ---
-permalink: /index.html
+langs: [en, fr, ru]
+pagination:
+  data: langs
+  size: 1
+  alias: lang
+permalink: "{{ '/' if lang == 'en' else '/' + lang + '/' }}index.html"
 ---
 {%- set s = settings -%}
-{%- set langs = ["en", "fr", "ru"] -%}
-{%- macro t(v) -%}{% for l in langs %}<span class="{{ l }}" lang="{{ l }}">{{ v[l] }}</span>{% endfor %}{%- endmacro -%}
+{%- set home = { en: "/", fr: "/fr/", ru: "/ru/" } -%}
+{%- set locale = { en: "en_GB", fr: "fr_FR", ru: "ru_RU" } -%}
+{%- macro t(v) -%}{{ v[lang] }}{%- endmacro -%}
 {%- macro photo(file, alt, cls, loading = "lazy") -%}
-  <img class="{{ cls }} object-cover" src="/assets/photos/{{ file }}" alt="{{ alt.en }}"{% for l in langs %} data-alt-{{ l }}="{{ alt[l] }}"{% endfor %} loading="{{ loading }}">
+  <img class="{{ cls }} object-cover" src="/assets/photos/{{ file }}" alt="{{ alt[lang] }}" loading="{{ loading }}">
 {%- endmacro -%}
-{%- set description = "Sunny central duplex with river view, Lisbon, " + s.season.en + ". " + s.available.en + ". Friends and friends of friends." -%}
+{%- set lisbon = { en: "Lisbon", fr: "Lisbonne", ru: "Лиссабон" } -%}
+{%- set stay = { en: "a place to stay", fr: "un endroit où loger", ru: "где остановиться" } -%}
+{%- set pitch = { en: "Sunny central duplex with river view", fr: "Duplex lumineux, central, vue sur le Tage", ru: "Солнечный дуплекс в центре с видом на реку" } -%}
+{%- set friends = { en: "Friends, and friends of friends.", fr: "Pour les amis, et les amis d'amis.", ru: "Для друзей и друзей друзей." } -%}
+{%- set title = lisbon[lang] + ", " + s.season[lang] + " — " + stay[lang] -%}
+{%- set description = pitch[lang] + ". " + s.available[lang] + ". " + friends[lang] -%}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ lang }}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lisbon, {{ s.season.en }} — a place to stay</title>
+  <title>{{ title }}</title>
   <meta name="description" content="{{ description }}">
-
-  <script>
-    (() => {
-      const supported = ['en', 'fr', 'ru'];
-      let lang = null;
-      try { lang = localStorage.getItem('lisbon-lang'); } catch {}
-      if (!supported.includes(lang)) {
-        lang = (navigator.language || 'en').toLowerCase().slice(0, 2);
-        if (!supported.includes(lang)) lang = 'en';
-      }
-      document.documentElement.lang = lang;
-    })();
-  </script>
+  {%- for l in langs %}
+  <link rel="alternate" hreflang="{{ l }}" href="https://lisbon.milizone.com{{ home[l] }}">
+  {%- endfor %}
+  <link rel="alternate" hreflang="x-default" href="https://lisbon.milizone.com/">
 
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -42,13 +44,17 @@ permalink: /index.html
   <link rel="stylesheet" href="/css/style.css">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="A place to stay in Lisbon — {{ s.season.en }}">
+  <meta property="og:title" content="{{ title }}">
   <meta property="og:description" content="{{ description }}">
-  <meta property="og:url" content="https://lisbon.milizone.com/">
+  <meta property="og:url" content="https://lisbon.milizone.com{{ home[lang] }}">
+  <meta property="og:locale" content="{{ locale[lang] }}">
+  {%- for l in langs %}{% if l != lang %}
+  <meta property="og:locale:alternate" content="{{ locale[l] }}">
+  {%- endif %}{% endfor %}
   <meta property="og:image" content="https://lisbon.milizone.com/assets/og.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="{{ s.hero.alt.en }}">
+  <meta property="og:image:alt" content="{{ s.hero.alt[lang] }}">
   <meta name="twitter:card" content="summary_large_image">
 </head>
 <body class="bg-paper font-sans leading-relaxed text-ink">
@@ -107,29 +113,33 @@ permalink: /index.html
 
   <section class="grid items-start gap-8 pt-16 md:grid-cols-5 md:gap-12 md:pt-24">
     <div class="space-y-4 md:col-span-3 md:col-start-3">
-      <div class="en space-y-4" lang="en">
+      {%- if lang == "en" %}
+      <div class="space-y-4">
         <p>Our place has 2 bedrooms and 2 bathrooms, one with a bathtub. On the first level, there is a fully equipped kitchen with a dishwasher and washing machine.</p>
         <p>There is a pleasant dining area with an extendable table for 6 guests, a living room, and a small nook by the window where you can enjoy your morning coffee while listening to your favourite music on the Sonos. This level also has one bedroom and a bathroom with a walk-in shower.</p>
         <p>Our place has many paintings and art pieces. Some of the kitchenware is vintage or artisanal, collected from around Europe.</p>
         <p>On the second level, there is a second bedroom and a bathroom. There is also a working desk with a view of the Tejo river, as well as a small extendable balcony where you can enjoy a glass of Vinho Verde with the view.</p>
-        <p>We have air conditioning in all rooms, although we rarely use it, as the apartment airs well when the windows are open on both levels.</p>
+        <p>All rooms have reversible air conditioning, so it heats too. We rarely use it, but some winter evenings call for it.</p>
         <p>Our neighbourhood is situated between Santos and Lapa, surrounded by various cafés and restaurants. At the same time, we are on a quiet one-way street. Santos train station is only a few minutes’ walk away, from where you can travel to the beaches towards Cascais. Cais do Sodré is about a 10-minute walk away, making it easy to catch a bus towards Avenida or walk uphill to enjoy the greenery of Estrela Park.</p>
         <p>There are mini-markets and supermarkets all within a short walking distance.</p>
       </div>
-      <div class="fr space-y-4" lang="fr">
+      {%- elif lang == "fr" %}
+      <div class="space-y-4">
         <p>Au premier niveau, la salle à manger peut accueillir 6 convives. Le salon comprend un petit coin près de la fenêtre, idéal pour du petit-déjeuner à l’apéritif. La cuisine inclut un lave-vaisselle et un lave-linge. La chambre principale a été refaite en novembre 2026. À ce niveau, il y a également les toilettes et la douche.</p>
         <p>Au deuxième niveau se trouvent une seconde chambre avec 2 lits simples et une salle de bain. Si vous tenez vraiment à travailler, le bureau offre une vue sur le Tage et un écran de 34". Le velux s’ouvre en un petit balcon, endroit parfait pour un verre de vinho verde en admirant le panorama.</p>
         <p>Toutes les pièces sont équipées d’une climatisation réversible. Nous l’utilisons rarement, mais certains soirs d’hiver peuvent en bénéficier.</p>
       </div>
-      <div class="ru space-y-4" lang="ru">
+      {%- else %}
+      <div class="space-y-4">
         <p>В квартире 2 спальни и 2 ванные комнаты, в одной из них есть ванна. На первом уровне — полностью оборудованная кухня с посудомоечной и стиральной машинами.</p>
         <p>Здесь же уютная обеденная зона с раздвижным столом на 6 человек, гостиная и небольшой уголок у окна, где можно выпить утренний кофе под любимую музыку на Sonos. На этом уровне также одна спальня и ванная комната с душевой.</p>
         <p>В квартире много картин и предметов искусства. Часть посуды — винтажная или ручной работы, собранная по всей Европе.</p>
         <p>На втором уровне — вторая спальня и ванная комната. Там же рабочий стол с видом на реку Тежу и небольшой раскладной балкон, где можно выпить бокал винью верде, любуясь видом.</p>
-        <p>Во всех комнатах есть кондиционеры, но мы редко ими пользуемся: когда окна открыты на обоих уровнях, квартира хорошо проветривается.</p>
+        <p>Во всех комнатах есть кондиционеры, которые работают и на обогрев. Мы редко ими пользуемся, но в некоторые зимние вечера они пригодятся.</p>
         <p>Наш район находится между Сантушем и Лапой, вокруг много кафе и ресторанов. При этом мы живём на тихой улице с односторонним движением. До вокзала Сантуш всего несколько минут пешком — оттуда можно доехать до пляжей в сторону Кашкайша. До Кайш-ду-Содре около 10 минут пешком: оттуда легко сесть на автобус до Авениды или подняться в гору к зелени парка Эштрела.</p>
         <p>Минимаркеты и супермаркеты — в нескольких минутах ходьбы.</p>
       </div>
+      {%- endif %}
     </div>
     <aside class="border-t border-rule pt-6 max-md:order-last md:col-span-2 md:col-start-1 md:row-start-1 md:border-t-0 md:pt-0">
       <h3 class="text-xs tracking-widest text-muted uppercase">{{ t({ en: "Good to know", fr: "Bon à savoir", ru: "Полезно знать" }) }}</h3>
@@ -161,7 +171,7 @@ permalink: /index.html
 }) }}</footer>
 
 <dialog id="contact" aria-labelledby="contact-title" class="m-auto w-11/12 max-w-sm rounded-lg bg-paper px-8 pt-10 pb-8 text-center text-ink backdrop:bg-ink/60">
-  <button type="button" class="close absolute top-2 right-2 size-11 cursor-pointer text-lg text-muted" aria-label="Close">✕</button>
+  <button type="button" class="close absolute top-2 right-2 size-11 cursor-pointer text-lg text-muted" aria-label="{{ t({ en: 'Close', fr: 'Fermer', ru: 'Закрыть' }) }}">✕</button>
   <h2 id="contact-title" class="mb-2 font-serif text-3xl leading-tight">{{ t({
     en: "Message us.",
     fr: "Écrivez-nous.",
@@ -174,11 +184,11 @@ permalink: /index.html
   }) }}</p>
 </dialog>
 
-<div class="fixed right-4 bottom-4 z-20 flex flex-col overflow-hidden rounded-full bg-white/85 shadow backdrop-blur" role="group" aria-label="Language">
+<nav class="fixed right-4 bottom-4 z-20 flex flex-col overflow-hidden rounded-full bg-white/85 shadow backdrop-blur" aria-label="Language">
   {%- for l in langs %}
-  <button type="button" data-lang="{{ l }}" lang="{{ l }}" class="size-11 cursor-pointer text-xs font-semibold text-ink hover:bg-white aria-pressed:bg-ink aria-pressed:text-white focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent">{{ l | upper }}</button>
+  <a href="{{ home[l] }}" hreflang="{{ l }}" lang="{{ l }}"{% if l == lang %} aria-current="page"{% endif %} class="flex size-11 items-center justify-center text-xs font-semibold text-ink hover:bg-white aria-[current=page]:bg-ink aria-[current=page]:text-white focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent">{{ l | upper }}</a>
   {%- endfor %}
-</div>
+</nav>
 
 <script>
   (() => {
@@ -187,18 +197,6 @@ permalink: /index.html
     dialog.querySelector('.close').addEventListener('click', () => dialog.close());
     // A click on the backdrop lands on the dialog element itself.
     dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
-
-    const buttons = document.querySelectorAll('[data-lang]');
-    const show = (lang) => {
-      document.documentElement.lang = lang;
-      document.querySelectorAll('img[data-alt-' + lang + ']').forEach((img) => { img.alt = img.getAttribute('data-alt-' + lang); });
-      buttons.forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
-    };
-    show(document.documentElement.lang);
-    buttons.forEach((b) => b.addEventListener('click', () => {
-      show(b.dataset.lang);
-      try { localStorage.setItem('lisbon-lang', b.dataset.lang); } catch {}
-    }));
   })();
 </script>
 </body>

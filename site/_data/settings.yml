@@ -22,9 +22,9 @@ minimum_stay:
   ru: 1 неделя
 
 rent:
-  en: 700 € / week
-  fr: 700 € / semaine
-  ru: 700 € в неделю
+  en: 800 € / week
+  fr: 800 € / semaine
+  ru: 800 € в неделю
 
 # The big photo at the top. Files go in site/assets/photos/.
 # The link preview image is site/assets/og.jpg (1200×630), made from the hero.

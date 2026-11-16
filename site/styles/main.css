@@ -15,10 +15,3 @@
   --color-muted: #5e5a54;
   --color-rule: #d9d1c4;
 }
-
-@layer base {
-  /* Every language is in the HTML; <html lang> picks which one shows. */
-  html:not([lang="en"]) .en,
-  html:not([lang="fr"]) .fr,
-  html:not([lang="ru"]) .ru { display: none; }
-}
