@@ -1,0 +1,167 @@
+---
+permalink: /index.html
+---
+{%- set s = settings -%}
+{%- set langs = ["en", "fr", "ru"] -%}
+{%- macro t(v) -%}{% for l in langs %}<span class="{{ l }}" lang="{{ l }}">{{ v[l] }}</span>{% endfor %}{%- endmacro -%}
+{%- macro photo(file, label, cls, placeholder = "", loading = "lazy") -%}
+  {%- if file -%}<img class="{{ cls }} object-cover" src="/assets/photos/{{ file }}" alt="{{ label }}" loading="{{ loading }}">
+  {%- else -%}<div class="{{ cls }} {{ placeholder }} bg-linear-to-br from-slate-400 to-orange-300" role="img" aria-label="{{ label }}"></div>{%- endif -%}
+{%- endmacro -%}
+{%- set description = "Bright, lived-in flat in Santos, " + s.season.en + ". " + s.available.en + ". Friends and friends of friends." -%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lisbon, {{ s.season.en }} — a place to stay</title>
+  <meta name="description" content="{{ description }}">
+
+  <script>
+    (() => {
+      const supported = ['en', 'fr', 'ru'];
+      let lang = null;
+      try { lang = localStorage.getItem('lisbon-lang'); } catch {}
+      if (!supported.includes(lang)) {
+        lang = (navigator.language || 'en').toLowerCase().slice(0, 2);
+        if (!supported.includes(lang)) lang = 'en';
+      }
+      document.documentElement.lang = lang;
+    })();
+  </script>
+
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#f4efe7">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=Public+Sans:wght@400;600&family=Literata:ital,opsz,wght@0,7..72,400;1,7..72,400&family=Golos+Text:wght@400;600&display=swap">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="A place to stay in Lisbon — {{ s.season.en }}">
+  <meta property="og:description" content="{{ description }}">
+  <meta property="og:url" content="https://lisbon.milizone.com/">
+  <meta property="og:image" content="https://lisbon.milizone.com/assets/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{{ s.hero.alt.en }}">
+  <meta name="twitter:card" content="summary_large_image">
+</head>
+<body class="bg-paper font-sans leading-relaxed text-ink">
+
+<header class="relative h-[88svh] min-h-128 overflow-hidden after:absolute after:inset-0 after:bg-linear-to-b after:from-transparent after:from-30% after:to-ink/85">
+  {{ photo(s.hero.file, s.hero.alt.en, "absolute inset-0 size-full", "", "eager") }}
+  <div class="absolute inset-x-0 bottom-14 z-10 mx-auto max-w-5xl px-5 text-white">
+    <div class="text-sm tracking-widest uppercase opacity-90">{{ t({ en: "Santos · Lisbon", fr: "Santos · Lisbonne", ru: "Сантуш · Лиссабон" }) }}</div>
+    <h1 class="mt-2 mb-4 font-serif text-6xl leading-none md:text-7xl lg:text-8xl">{{ t({ en: "Lisbon,", fr: "Lisbonne,", ru: "Лиссабон," }) }} <em class="text-blush">{{ t(s.season) }}.</em></h1>
+    <p class="max-w-md text-lg">{{ t({
+      en: "Our place is free while we're away. Friends, and friends of friends.",
+      fr: "Notre appart est libre pendant notre absence. Pour les amis, et les amis d'amis.",
+      ru: "Наша квартира свободна, пока нас нет. Для друзей и друзей друзей."
+    }) }}</p>
+  </div>
+</header>
+
+<main class="mx-auto max-w-5xl px-5">
+  <dl class="-mx-5 grid grid-cols-2 gap-px border-b border-rule bg-rule md:grid-cols-4">
+    {%- for f in [
+      { label: { en: "Available", fr: "Disponible", ru: "Свободно" }, value: s.available },
+      { label: { en: "Sleeps", fr: "Couchage", ru: "Спальные места" }, value: s.sleeps },
+      { label: { en: "Minimum stay", fr: "Séjour minimum", ru: "Минимальный срок" }, value: s.minimum_stay },
+      { label: { en: "Rent", fr: "Loyer", ru: "Аренда" }, value: s.rent }
+    ] %}
+    <div class="bg-paper px-5 py-6">
+      <dt class="text-xs tracking-widest text-muted uppercase">{{ t(f.label) }}</dt>
+      <dd class="mt-1 font-serif text-xl leading-tight text-balance hyphens-auto md:text-2xl">{{ t(f.value) }}</dd>
+    </div>
+    {%- endfor %}
+  </dl>
+
+  <section class="grid items-start gap-5 py-12 md:grid-cols-5 md:gap-12 md:py-20">
+    <h2 class="font-serif text-4xl leading-tight md:col-span-2">{{ t({
+      en: "Bright, lived-in, close to the river.",
+      fr: "Lumineux, habité, près du fleuve.",
+      ru: "Светлая, обжитая, рядом с рекой."
+    }) }}</h2>
+    <div class="space-y-4 md:col-span-3">
+      <p>{{ t({
+        en: "High enough up that the view feels earned. Two bedrooms with double beds, a proper kitchen, and a living room you'll actually use.",
+        fr: "Assez haut pour que la vue se mérite. Deux chambres avec lits doubles, une vraie cuisine, et un salon où l'on vit vraiment.",
+        ru: "Достаточно высоко, чтобы вид был заслуженным. Две спальни с двуспальными кроватями, настоящая кухня и гостиная, в которой действительно хочется проводить время."
+      }) }}</p>
+      <p>{{ t({
+        en: "Best for people who want a real Lisbon base for a week or more, not a hotel room.",
+        fr: "Idéal pour qui veut une vraie base à Lisbonne pour une semaine ou plus, pas une chambre d'hôtel.",
+        ru: "Лучше всего подойдёт тем, кому нужна настоящая база в Лиссабоне на неделю или дольше, а не номер в отеле."
+      }) }}</p>
+    </div>
+  </section>
+
+  <section class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {%- for p in s.photos %}{% if not p.paused %}
+    <figure>
+      {{ photo(p.file, p.caption.en, "block w-full rounded aspect-3/4") }}
+      <figcaption class="mt-1 text-sm text-muted">{{ t(p.caption) }}</figcaption>
+    </figure>
+    {%- endif %}{% endfor %}
+  </section>
+
+  <section class="pt-24 pb-20 text-center">
+    <h2 class="font-serif text-4xl md:text-5xl">{{ t({ en: "Want it?", fr: "Ça vous tente ?", ru: "Заинтересовало?" }) }}</h2>
+    <button id="open-contact" type="button" class="mt-6 cursor-pointer rounded-full bg-accent px-8 py-4 font-semibold text-white transition-colors hover:bg-accent-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">{{ t({ en: "Message us", fr: "Écrivez-nous", ru: "Напишите нам" }) }}</button>
+  </section>
+</main>
+
+<footer class="border-t border-rule px-5 pt-8 pb-10 text-center font-serif text-xl italic">{{ t({
+  en: "Sun, views, and stairs. Tram not included.",
+  fr: "Du soleil, des vues, des escaliers. Tram non compris.",
+  ru: "Солнце, виды и лестницы. Трамвай не включён."
+}) }}</footer>
+
+<dialog id="contact" aria-labelledby="contact-title" class="m-auto w-11/12 max-w-sm rounded-lg bg-paper px-8 pt-10 pb-8 text-center text-ink backdrop:bg-ink/60">
+  <button type="button" class="close absolute top-2 right-2 size-11 cursor-pointer text-lg text-muted" aria-label="Close">✕</button>
+  <h2 id="contact-title" class="mb-2 font-serif text-3xl leading-tight">{{ t({
+    en: "Message us directly.",
+    fr: "Écrivez-nous directement.",
+    ru: "Напишите нам напрямую."
+  }) }}</h2>
+  <p>{{ t({
+    en: "You know where to find us. Tell us your dates and we'll let you know.",
+    fr: "Vous savez où nous trouver. Dites-nous vos dates, on vous répond.",
+    ru: "Вы знаете, как нас найти. Сообщите ваши даты, и мы ответим."
+  }) }}</p>
+</dialog>
+
+<div class="fixed right-4 bottom-4 z-20 flex flex-col overflow-hidden rounded-full bg-white/85 shadow backdrop-blur" role="group" aria-label="Language">
+  {%- for l in langs %}
+  <button type="button" data-lang="{{ l }}" lang="{{ l }}" class="size-11 cursor-pointer text-xs font-semibold text-ink hover:bg-white aria-pressed:bg-ink aria-pressed:text-white focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent">{{ l | upper }}</button>
+  {%- endfor %}
+</div>
+
+<script>
+  (() => {
+    const dialog = document.getElementById('contact');
+    document.getElementById('open-contact').addEventListener('click', () => dialog.showModal());
+    dialog.querySelector('.close').addEventListener('click', () => dialog.close());
+    // A click on the backdrop lands on the dialog element itself.
+    dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
+
+    const buttons = document.querySelectorAll('[data-lang]');
+    const show = (lang) => {
+      document.documentElement.lang = lang;
+      buttons.forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
+    };
+    show(document.documentElement.lang);
+    buttons.forEach((b) => b.addEventListener('click', () => {
+      show(b.dataset.lang);
+      try { localStorage.setItem('lisbon-lang', b.dataset.lang); } catch {}
+    }));
+  })();
+</script>
+</body>
+</html>

@@ -3,3 +3,5 @@
 .remember/
 .playwright-mcp/
 src/
+node_modules/
+_site/

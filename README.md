@@ -1,29 +1,29 @@
 # lisbon.milizone.com
 
-Static single-page postcard site. Deployed via GitHub Pages from the `main` branch root.
+Single landing page for the Santos flat, built with Eleventy and deployed to GitHub Pages by `.github/workflows/deploy.yml` on push to `main`.
 
 ## Local preview
 
-    python3 -m http.server 8000
+    npm install
+    npm run serve
 
-Then open <http://localhost:8000/>.
+Then open <http://localhost:8080/>.
 
-## Deploy
+## Updating the page
 
-GitHub Pages serves the repo root on push to `main`. The `CNAME` file pins the site to `lisbon.milizone.com`.
+Everything that changes between seasons is in `site/_data/settings.yml`: season, dates, sleeps, minimum stay, rent, the hero photo and the photo list. Each text has `en`, `fr` and `ru` versions.
+
+- Photos go in `site/assets/photos/` and are referenced by file name.
+- Order in `photos:` is the order on the page.
+- `paused: true` hides a photo without removing it.
+- The link preview image is `site/assets/og.jpg` (1200×630), cropped from the hero photo. Regenerate it when the hero changes.
+
+The rest of the copy is in `site/index.njk`.
+
+`src/` (gitignored) is a scratch handoff folder, not the Eleventy input.
 
 ## DNS
 
-At the DNS provider for `milizone.com`, point `lisbon` as a `CNAME` to `gcrofils.github.io`. HTTPS is enforced automatically by GitHub once the cert is provisioned.
+At the DNS provider for `milizone.com`, point `lisbon` as a `CNAME` to `gcrofils.github.io`. The `site/CNAME` file pins the custom domain.
 
-## Updating assets
-
-When swapping the postcard image or restyling `style.css`, bump the `?v=N` query string on every asset reference in `index.html` (find/replace `?v=N` → `?v=N+1`). That forces browsers and social-platform scrapers to refetch instead of serving a stale copy.
-
-Sources for the postcard live in `src/` (gitignored). The site assets are:
-
-- `assets/postcard-front.jpg` — front, ~1400px wide JPG
-- `assets/postcard-back.jpg` — English back, ~1400px wide JPG
-- `assets/postcard-back-fr.jpg` — French back, ~1400px wide JPG
-- `assets/og-image.jpg` — front composed onto a 1200×630 paper background
-- Favicons at site root (`favicon.ico`, `favicon-16x16.png`, `favicon-32x32.png`, `apple-touch-icon.png`, `android-chrome-192x192.png`, `android-chrome-512x512.png`) plus `site.webmanifest`. Regenerate at <https://realfavicongenerator.net> only when the logo itself changes.
+Favicons and `site.webmanifest` live in `site/`. Regenerate at <https://realfavicongenerator.net> only when the logo changes.

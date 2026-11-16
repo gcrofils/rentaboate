@@ -1,0 +1,50 @@
+# Everything that changes between seasons lives here.
+# Each text has an English (en), French (fr) and Russian (ru) version.
+
+season:
+  en: this winter
+  fr: cet hiver
+  ru: этой зимой
+
+available:
+  en: 21 December – 24 February
+  fr: 21 décembre – 24 février
+  ru: 21 декабря – 24 февраля
+
+sleeps:
+  en: 2 bedrooms, 2 double beds
+  fr: 2 chambres, 2 lits doubles
+  ru: 2 спальни, 2 двуспальные кровати
+
+minimum_stay:
+  en: 1 week
+  fr: 1 semaine
+  ru: 1 неделя
+
+rent:
+  en: 700 € / week
+  fr: 700 € / semaine
+  ru: 700 € в неделю
+
+# The big photo at the top. Files go in site/assets/photos/.
+# The link preview image is site/assets/og.jpg (1200×630), made from the hero.
+hero:
+  file: hero-candles.jpg
+  alt:
+    en: Living room with candles and the sideboard
+    fr: Le salon, bougies et buffet
+    ru: Гостиная со свечами и комодом
+
+# Order here is the order on the page.
+# paused: true hides a photo without removing it.
+photos:
+  - file: living-room.jpg
+    caption: { en: Living room, fr: Le salon, ru: Гостиная }
+  - file: dining-corner.jpg
+    caption: { en: Dining corner, fr: Le coin repas, ru: Обеденная зона }
+  - file: dinner.jpg
+    caption: { en: Dinner at home, fr: Dîner à la maison, ru: Ужин дома }
+  - file: apero.jpg
+    caption: { en: Apéro, fr: L'apéro, ru: Аперитив }
+  - file: bedroom.jpg
+    caption: { en: Bedroom, fr: La chambre, ru: Спальня }
