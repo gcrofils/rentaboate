@@ -14,7 +14,7 @@ Then open <http://localhost:8080/>.
 Everything that changes between seasons is in `site/_data/settings.yml`: season, dates, sleeps, minimum stay, rent, the hero photo and the photo list. Each text has `en`, `fr` and `ru` versions.
 
 - Photos go in `site/assets/photos/` and are referenced by file name.
-- Order in `photos:` is the order on the page.
+- Order in `photos:` is the order on the page (column by column: the first column fills top to bottom, then the next).
 - `paused: true` hides a photo without removing it.
 - The link preview image is `site/assets/og.jpg` (1200×630), cropped from the hero photo. Regenerate it when the hero changes.
 

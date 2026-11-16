@@ -4,11 +4,10 @@ permalink: /index.html
 {%- set s = settings -%}
 {%- set langs = ["en", "fr", "ru"] -%}
 {%- macro t(v) -%}{% for l in langs %}<span class="{{ l }}" lang="{{ l }}">{{ v[l] }}</span>{% endfor %}{%- endmacro -%}
-{%- macro photo(file, label, cls, placeholder = "", loading = "lazy") -%}
-  {%- if file -%}<img class="{{ cls }} object-cover" src="/assets/photos/{{ file }}" alt="{{ label }}" loading="{{ loading }}">
-  {%- else -%}<div class="{{ cls }} {{ placeholder }} bg-linear-to-br from-slate-400 to-orange-300" role="img" aria-label="{{ label }}"></div>{%- endif -%}
+{%- macro photo(file, alt, cls, loading = "lazy") -%}
+  <img class="{{ cls }} object-cover" src="/assets/photos/{{ file }}" alt="{{ alt.en }}"{% for l in langs %} data-alt-{{ l }}="{{ alt[l] }}"{% endfor %} loading="{{ loading }}">
 {%- endmacro -%}
-{%- set description = "Bright, lived-in flat in Santos, " + s.season.en + ". " + s.available.en + ". Friends and friends of friends." -%}
+{%- set description = "Sunny central duplex with river view, Lisbon, " + s.season.en + ". " + s.available.en + ". Friends and friends of friends." -%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,7 +54,7 @@ permalink: /index.html
 <body class="bg-paper font-sans leading-relaxed text-ink">
 
 <header class="relative h-[88svh] min-h-128 overflow-hidden after:absolute after:inset-0 after:bg-linear-to-b after:from-transparent after:from-30% after:to-ink/85">
-  {{ photo(s.hero.file, s.hero.alt.en, "absolute inset-0 size-full", "", "eager") }}
+  {{ photo(s.hero.file, s.hero.alt, "absolute inset-0 size-full", "eager") }}
   <div class="absolute inset-x-0 bottom-14 z-10 mx-auto max-w-5xl px-5 text-white">
     <div class="text-sm tracking-widest uppercase opacity-90">{{ t({ en: "Santos · Lisbon", fr: "Santos · Lisbonne", ru: "Сантуш · Лиссабон" }) }}</div>
     <h1 class="mt-2 mb-4 font-serif text-6xl leading-none md:text-7xl lg:text-8xl">{{ t({ en: "Lisbon,", fr: "Lisbonne,", ru: "Лиссабон," }) }} <em class="text-blush">{{ t(s.season) }}.</em></h1>
@@ -84,31 +83,69 @@ permalink: /index.html
 
   <section class="grid items-start gap-5 py-12 md:grid-cols-5 md:gap-12 md:py-20">
     <h2 class="font-serif text-4xl leading-tight md:col-span-2">{{ t({
-      en: "Bright, lived-in, close to the river.",
-      fr: "Lumineux, habité, près du fleuve.",
-      ru: "Светлая, обжитая, рядом с рекой."
+      en: "Sunny Central Duplex with River View",
+      fr: "Duplex lumineux, central. Vue sur le Tage.",
+      ru: "Солнечный дуплекс в центре с видом на реку"
     }) }}</h2>
-    <div class="space-y-4 md:col-span-3">
-      <p>{{ t({
-        en: "High enough up that the view feels earned. Two bedrooms with double beds, a proper kitchen, and a living room you'll actually use.",
-        fr: "Assez haut pour que la vue se mérite. Deux chambres avec lits doubles, une vraie cuisine, et un salon où l'on vit vraiment.",
-        ru: "Достаточно высоко, чтобы вид был заслуженным. Две спальни с двуспальными кроватями, настоящая кухня и гостиная, в которой действительно хочется проводить время."
-      }) }}</p>
-      <p>{{ t({
-        en: "Best for people who want a real Lisbon base for a week or more, not a hotel room.",
-        fr: "Idéal pour qui veut une vraie base à Lisbonne pour une semaine ou plus, pas une chambre d'hôtel.",
-        ru: "Лучше всего подойдёт тем, кому нужна настоящая база в Лиссабоне на неделю или дольше, а не номер в отеле."
-      }) }}</p>
-    </div>
+    <p class="md:col-span-3">{{ t({
+      en: "Sunny and airy apartment with Pombaline timber structural elements, a distinctive feature of Lisbon’s historic architecture.",
+      fr: "Assez haut pour que la vue se mérite. Deux chambres, deux salles de bain, une vraie cuisine.",
+      ru: "Солнечная, полная воздуха квартира с помбалинскими деревянными конструкциями — характерной чертой исторической архитектуры Лиссабона."
+    }) }}</p>
   </section>
 
-  <section class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  <section class="columns-1 gap-4 sm:columns-2 lg:columns-3">
     {%- for p in s.photos %}{% if not p.paused %}
-    <figure>
-      {{ photo(p.file, p.caption.en, "block w-full rounded aspect-3/4") }}
-      <figcaption class="mt-1 text-sm text-muted">{{ t(p.caption) }}</figcaption>
+    <figure class="relative mb-4 break-inside-avoid">
+      {{ photo(p.file, p.alt, "block w-full rounded") }}
+      {%- if p.caption %}
+      <figcaption class="absolute inset-x-0 bottom-0 rounded-b bg-linear-to-t from-ink/70 to-transparent px-3 pt-8 pb-2 text-sm text-white">{{ t(p.caption) }}</figcaption>
+      {%- endif %}
     </figure>
     {%- endif %}{% endfor %}
+  </section>
+
+  <section class="grid items-start gap-8 pt-16 md:grid-cols-5 md:gap-12 md:pt-24">
+    <div class="space-y-4 md:col-span-3 md:col-start-3">
+      <div class="en space-y-4" lang="en">
+        <p>Our place has 2 bedrooms and 2 bathrooms, one with a bathtub. On the first level, there is a fully equipped kitchen with a dishwasher and washing machine.</p>
+        <p>There is a pleasant dining area with an extendable table for 6 guests, a living room, and a small nook by the window where you can enjoy your morning coffee while listening to your favourite music on the Sonos. This level also has one bedroom and a bathroom with a walk-in shower.</p>
+        <p>Our place has many paintings and art pieces. Some of the kitchenware is vintage or artisanal, collected from around Europe.</p>
+        <p>On the second level, there is a second bedroom and a bathroom. There is also a working desk with a view of the Tejo river, as well as a small extendable balcony where you can enjoy a glass of Vinho Verde with the view.</p>
+        <p>We have air conditioning in all rooms, although we rarely use it, as the apartment airs well when the windows are open on both levels.</p>
+        <p>Our neighbourhood is situated between Santos and Lapa, surrounded by various cafés and restaurants. At the same time, we are on a quiet one-way street. Santos train station is only a few minutes’ walk away, from where you can travel to the beaches towards Cascais. Cais do Sodré is about a 10-minute walk away, making it easy to catch a bus towards Avenida or walk uphill to enjoy the greenery of Estrela Park.</p>
+        <p>There are mini-markets and supermarkets all within a short walking distance.</p>
+      </div>
+      <div class="fr space-y-4" lang="fr">
+        <p>Au premier niveau, la salle à manger peut accueillir 6 convives. Le salon comprend un petit coin près de la fenêtre, idéal pour du petit-déjeuner à l’apéritif. La cuisine inclut un lave-vaisselle et un lave-linge. La chambre principale a été refaite en novembre 2026. À ce niveau, il y a également les toilettes et la douche.</p>
+        <p>Au deuxième niveau se trouvent une seconde chambre avec 2 lits simples et une salle de bain. Si vous tenez vraiment à travailler, le bureau offre une vue sur le Tage et un écran de 34". Le velux s’ouvre en un petit balcon, endroit parfait pour un verre de vinho verde en admirant le panorama.</p>
+        <p>Toutes les pièces sont équipées d’une climatisation réversible. Nous l’utilisons rarement, mais certains soirs d’hiver peuvent en bénéficier.</p>
+      </div>
+      <div class="ru space-y-4" lang="ru">
+        <p>В квартире 2 спальни и 2 ванные комнаты, в одной из них есть ванна. На первом уровне — полностью оборудованная кухня с посудомоечной и стиральной машинами.</p>
+        <p>Здесь же уютная обеденная зона с раздвижным столом на 6 человек, гостиная и небольшой уголок у окна, где можно выпить утренний кофе под любимую музыку на Sonos. На этом уровне также одна спальня и ванная комната с душевой.</p>
+        <p>В квартире много картин и предметов искусства. Часть посуды — винтажная или ручной работы, собранная по всей Европе.</p>
+        <p>На втором уровне — вторая спальня и ванная комната. Там же рабочий стол с видом на реку Тежу и небольшой раскладной балкон, где можно выпить бокал винью верде, любуясь видом.</p>
+        <p>Во всех комнатах есть кондиционеры, но мы редко ими пользуемся: когда окна открыты на обоих уровнях, квартира хорошо проветривается.</p>
+        <p>Наш район находится между Сантушем и Лапой, вокруг много кафе и ресторанов. При этом мы живём на тихой улице с односторонним движением. До вокзала Сантуш всего несколько минут пешком — оттуда можно доехать до пляжей в сторону Кашкайша. До Кайш-ду-Содре около 10 минут пешком: оттуда легко сесть на автобус до Авениды или подняться в гору к зелени парка Эштрела.</p>
+        <p>Минимаркеты и супермаркеты — в нескольких минутах ходьбы.</p>
+      </div>
+    </div>
+    <aside class="border-t border-rule pt-6 max-md:order-last md:col-span-2 md:col-start-1 md:row-start-1 md:border-t-0 md:pt-0">
+      <h3 class="text-xs tracking-widest text-muted uppercase">{{ t({ en: "Good to know", fr: "Bon à savoir", ru: "Полезно знать" }) }}</h3>
+      <ul class="mt-3 space-y-3">
+        <li>{{ t({
+          en: "There is no lift in our building, although the staircase is quite wide.",
+          fr: "Il n’y a pas d’ascenseur dans notre immeuble. Mais à Lisbonne, ce ne sont pas les 4 étages qui vont vous impressionner.",
+          ru: "В доме нет лифта, хотя лестница довольно широкая."
+        }) }}</li>
+        <li>{{ t({
+          en: "There is no dedicated parking, but a car can be safely parked outside or in a paid car park about 10 minutes away.",
+          fr: "Il n’y a pas de stationnement dédié, mais il est possible de garer une voiture en toute sécurité à l’extérieur ou dans un parking payant situé à environ 10 minutes.",
+          ru: "Выделенной парковки нет, но машину можно спокойно оставить на улице или на платной парковке примерно в 10 минутах."
+        }) }}</li>
+      </ul>
+    </aside>
   </section>
 
   <section class="pt-24 pb-20 text-center">
@@ -118,22 +155,22 @@ permalink: /index.html
 </main>
 
 <footer class="border-t border-rule px-5 pt-8 pb-10 text-center font-serif text-xl italic">{{ t({
-  en: "Sun, views, and stairs. Tram not included.",
-  fr: "Du soleil, des vues, des escaliers. Tram non compris.",
-  ru: "Солнце, виды и лестницы. Трамвай не включён."
+  en: "A different winter? Lisbon.",
+  fr: "Un hiver différent ? Lisbonne.",
+  ru: "Другая зима? Лиссабон."
 }) }}</footer>
 
 <dialog id="contact" aria-labelledby="contact-title" class="m-auto w-11/12 max-w-sm rounded-lg bg-paper px-8 pt-10 pb-8 text-center text-ink backdrop:bg-ink/60">
   <button type="button" class="close absolute top-2 right-2 size-11 cursor-pointer text-lg text-muted" aria-label="Close">✕</button>
   <h2 id="contact-title" class="mb-2 font-serif text-3xl leading-tight">{{ t({
-    en: "Message us directly.",
-    fr: "Écrivez-nous directement.",
-    ru: "Напишите нам напрямую."
+    en: "Message us.",
+    fr: "Écrivez-nous.",
+    ru: "Напишите нам."
   }) }}</h2>
   <p>{{ t({
-    en: "You know where to find us. Tell us your dates and we'll let you know.",
-    fr: "Vous savez où nous trouver. Dites-nous vos dates, on vous répond.",
-    ru: "Вы знаете, как нас найти. Сообщите ваши даты, и мы ответим."
+    en: "You found this site, so you know how to reach us.",
+    fr: "Vous avez trouvé ce site, vous saurez nous contacter.",
+    ru: "Вы нашли этот сайт — значит, знаете, как с нами связаться."
   }) }}</p>
 </dialog>
 
@@ -154,6 +191,7 @@ permalink: /index.html
     const buttons = document.querySelectorAll('[data-lang]');
     const show = (lang) => {
       document.documentElement.lang = lang;
+      document.querySelectorAll('img[data-alt-' + lang + ']').forEach((img) => { img.alt = img.getAttribute('data-alt-' + lang); });
       buttons.forEach((b) => b.setAttribute('aria-pressed', b.dataset.lang === lang));
     };
     show(document.documentElement.lang);

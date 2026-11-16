@@ -12,9 +12,9 @@ available:
   ru: 21 декабря – 24 февраля
 
 sleeps:
-  en: 2 bedrooms, 2 double beds
-  fr: 2 chambres, 2 lits doubles
-  ru: 2 спальни, 2 двуспальные кровати
+  en: "2 bedrooms: 1 double bed, 2 single beds"
+  fr: "2 chambres : 1 lit double, 2 lits simples"
+  ru: "2 спальни: 1 двуспальная кровать, 2 односпальные"
 
 minimum_stay:
   en: 1 week
@@ -29,22 +29,80 @@ rent:
 # The big photo at the top. Files go in site/assets/photos/.
 # The link preview image is site/assets/og.jpg (1200×630), made from the hero.
 hero:
-  file: hero-candles.jpg
+  file: hero-tram.jpg
   alt:
-    en: Living room with candles and the sideboard
-    fr: Le salon, bougies et buffet
-    ru: Гостиная со свечами и комодом
+    en: A yellow Lisbon tram
+    fr: Un tram jaune de Lisbonne
+    ru: Жёлтый лиссабонский трамвай
 
-# Order here is the order on the page.
+# Order here is the order on the page: the photos fill the first column
+# top to bottom, then the next one.
+# alt: describes the photo for screen readers, never shown.
+# caption: optional, shown over the photo. Leave it out for a plain tile.
 # paused: true hides a photo without removing it.
 photos:
   - file: living-room.jpg
-    caption: { en: Living room, fr: Le salon, ru: Гостиная }
-  - file: dining-corner.jpg
-    caption: { en: Dining corner, fr: Le coin repas, ru: Обеденная зона }
-  - file: dinner.jpg
-    caption: { en: Dinner at home, fr: Dîner à la maison, ru: Ужин дома }
+    alt:
+      en: Living room with sofa and armchair
+      fr: Le salon avec canapé et fauteuil
+      ru: Гостиная с диваном и креслом
+  - file: skylight-view.jpg
+    alt:
+      en: View over the rooftops from the skylight
+      fr: Vue sur les toits depuis le velux
+      ru: Вид на крыши из мансардного окна
+  - file: dinner-window.jpg
+    alt:
+      en: Candlelit dinner by the window
+      fr: Dîner aux chandelles près de la fenêtre
+      ru: Ужин при свечах у окна
+  - file: kitchen.jpg
+    alt:
+      en: Kitchen
+      fr: La cuisine
+      ru: Кухня
+  - file: balcony.jpg
+    alt:
+      en: Door to the balcony
+      fr: Porte-fenêtre du balcon
+      ru: Дверь на балкон
+  - file: candles.jpg
+    alt:
+      en: Candles and the sideboard
+      fr: Bougies et buffet
+      ru: Свечи и комод
+  - file: towels.jpg
+    alt:
+      en: Towels laid out on the bed
+      fr: Serviettes posées sur le lit
+      ru: Полотенца на кровати
+  - file: attic.jpg
+    alt:
+      en: Under the roof, with a window on the city
+      fr: Sous les toits, avec une fenêtre sur la ville
+      ru: Под крышей, с окном на город
   - file: apero.jpg
-    caption: { en: Apéro, fr: L'apéro, ru: Аперитив }
-  - file: bedroom.jpg
-    caption: { en: Bedroom, fr: La chambre, ru: Спальня }
+    alt:
+      en: Apéro board
+      fr: Planche apéro
+      ru: Закуски к аперитиву
+  - file: kitchen-2.jpg
+    alt:
+      en: Kitchen with washing machine
+      fr: Cuisine avec lave-linge
+      ru: Кухня со стиральной машиной
+  - file: shower.jpg
+    alt:
+      en: Shower room
+      fr: Salle d'eau
+      ru: Душевая
+  - file: dinner.jpg
+    alt:
+      en: Dinner table
+      fr: Table du dîner
+      ru: Обеденный стол
+  - file: bathroom.jpg
+    alt:
+      en: Bathroom with bathtub
+      fr: Salle de bain avec baignoire
+      ru: Ванная комната с ванной
