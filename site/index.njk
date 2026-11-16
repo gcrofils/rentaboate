@@ -14,10 +14,10 @@ permalink: "{{ '/' if lang == 'en' else '/' + lang + '/' }}index.html"
   <img class="{{ cls }} object-cover" src="/assets/photos/{{ file }}" alt="{{ alt[lang] }}" loading="{{ loading }}">
 {%- endmacro -%}
 {%- set lisbon = { en: "Lisbon", fr: "Lisbonne", ru: "Лиссабон" } -%}
-{%- set stay = { en: "a place to stay", fr: "un endroit où loger", ru: "где остановиться" } -%}
+{%- set tagline = { en: "Our place. In the sun.", fr: "Chez nous. Au soleil.", ru: "У нас. На солнце." } -%}
 {%- set pitch = { en: "Sunny central duplex with river view", fr: "Duplex lumineux, central, vue sur le Tage", ru: "Солнечный дуплекс в центре с видом на реку" } -%}
 {%- set friends = { en: "Friends, and friends of friends.", fr: "Pour les amis, et les amis d'amis.", ru: "Для друзей и друзей друзей." } -%}
-{%- set title = lisbon[lang] + ", " + s.season[lang] + " — " + stay[lang] -%}
+{%- set title = lisbon[lang] + ", " + s.season[lang] + ". " + tagline[lang] -%}
 {%- set description = pitch[lang] + ". " + s.available[lang] + ". " + friends[lang] -%}
 <!DOCTYPE html>
 <html lang="{{ lang }}">
