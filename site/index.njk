@@ -20,6 +20,7 @@ permalink: "{{ '/' if lang == 'en' else '/' + lang + '/' }}index.html"
 {%- set friends = { en: "Friends, and friends of friends.", fr: "Pour les amis, et les amis d'amis.", ru: "Для друзей и друзей друзей." } -%}
 {%- set title = lisbon[lang] + ", " + s.season[lang] + ". " + tagline[lang] -%}
 {%- set description = pitch[lang] + ". " + s.available[lang] + ". " + friends[lang] -%}
+{%- set og_title = { en: title, fr: "On vous laisse les clés, du 21 déc. au 24 fév.", ru: title } -%}
 <!DOCTYPE html>
 <html lang="{{ lang }}">
 <head>
@@ -51,14 +52,14 @@ permalink: "{{ '/' if lang == 'en' else '/' + lang + '/' }}index.html"
   <link rel="stylesheet" href="/css/style.css">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="{{ title }}">
+  <meta property="og:title" content="{{ og_title[lang] }}">
   <meta property="og:description" content="{{ description }}">
   <meta property="og:url" content="https://lisbon.milizone.com{{ home[lang] }}">
   <meta property="og:locale" content="{{ locale[lang] }}">
   {%- for l in langs %}{% if l != lang %}
   <meta property="og:locale:alternate" content="{{ locale[l] }}">
   {%- endif %}{% endfor %}
-  <meta property="og:image" content="https://lisbon.milizone.com/assets/og.jpg">
+  <meta property="og:image" content="https://lisbon.milizone.com/assets/og-{{ lang }}.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="{{ s.hero.alt[lang] }}">
