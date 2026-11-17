@@ -29,6 +29,8 @@ permalink: "{{ '/' if lang == 'en' else '/' + lang + '/' }}index.html"
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
+    // Short visits don't show in Analytics; a first scroll sends one event so they do.
+    addEventListener('scroll', () => gtag('event', 'scrolled'), { once: true, passive: true });
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
