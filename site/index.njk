@@ -11,7 +11,8 @@ permalink: "{{ '/' if lang == 'en' else '/' + lang + '/' }}index.html"
 {%- set locale = { en: "en_GB", fr: "fr_FR", ru: "ru_RU" } -%}
 {%- macro t(v) -%}{{ v[lang] }}{%- endmacro -%}
 {%- macro photo(file, alt, cls, loading = "lazy") -%}
-  <img class="{{ cls }} object-cover" src="/assets/photos/{{ file }}" alt="{{ alt[lang] }}" loading="{{ loading }}">
+  {%- set d = file | dims -%}
+  <img class="{{ cls }} object-cover" src="/assets/photos/{{ file }}" alt="{{ alt[lang] }}" width="{{ d.width }}" height="{{ d.height }}" loading="{{ loading }}">
 {%- endmacro -%}
 {%- set lisbon = { en: "Lisbon", fr: "Lisbonne", ru: "Лиссабон" } -%}
 {%- set tagline = { en: "Our place. In the sun.", fr: "Chez nous. Au soleil.", ru: "У нас. На солнце." } -%}

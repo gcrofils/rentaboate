@@ -1,4 +1,6 @@
 import { execFileSync } from "node:child_process";
+import { readFileSync } from "node:fs";
+import { imageSize } from "image-size";
 import yaml from "js-yaml";
 
 export default function (eleventyConfig) {
@@ -14,6 +16,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addWatchTarget("site/styles/");
 
   eleventyConfig.addDataExtension("yml", (contents) => yaml.load(contents));
+
+  // Real pixel size of a photo, so <img> reserves its space before it loads.
+  eleventyConfig.addFilter("dims", (file) => imageSize(readFileSync(`site/assets/photos/${file}`)));
 
   eleventyConfig.addPassthroughCopy("site/assets");
   eleventyConfig.addPassthroughCopy("site/CNAME");
